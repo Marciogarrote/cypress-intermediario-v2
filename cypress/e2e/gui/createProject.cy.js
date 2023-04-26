@@ -5,9 +5,13 @@
 //O faker é uma biblioteca que serve para gerar dados aleatorios 
 import { faker } from '@faker-js/faker'
 
+const options = { env: { snapshotOnly: true } }
+
 //Pré condição
-describe('Create Project', () => {
+describe('Create Project', options, () => {
+  
   beforeEach(() => {
+    cy.api_deleteProjects()
     cy.login()
   })
 

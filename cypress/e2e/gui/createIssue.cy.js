@@ -1,9 +1,12 @@
 import { faker } from '@faker-js/faker'
 
+
+const options = { env: { snapshotOnly: true } }
+
 //Criando nosso describe para criar a issue com sucesso
 // criamos um objeto que definimos numa variavel chamada issue
 
-describe('Create Issue', () => {
+describe('Create Issue', options, () => {
   const issue = {
     title: `issue-${faker.datatype.uuid()}`,
     description: faker.random.words(3),
@@ -16,8 +19,9 @@ describe('Create Issue', () => {
     // beforeEach definimos a nossa pré condição
     // tem que estar logado e tem que existir um projeto
   beforeEach(() => {
+    cy.api_deleteProjects()
     cy.login()
-    cy.gui_createProject(issue.project)
+    cy.api_createProject(issue.project)
   })
 
    //Ação
